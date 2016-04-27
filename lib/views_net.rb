@@ -6,22 +6,23 @@ require "capybara/poltergeist"
 require "net/http"
 require "yaml"
 
-
 Capybara.current_driver = :poltergeist
 Capybara.javascript_driver = :poltergeist
 Capybara.app_host = 'https://www.jreast.co.jp/card'
-#Capybara.default_max_wait_time = 5
 
-module FakePlotergeistLogger
-  def self.puts(*)
-  end
-end
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, :js_errors => true, :timeout => 60, :phantomjs_logger => FakePlotergeistLogger )
+  Capybara::Poltergeist::Driver.new(
+    app, 
+    :js_errors => true, 
+    :timeout => 60, 
+    :phantomjs_logger => Module.new {
+      def self.puts(*)
+      end
+    }
+  )
 end
 
 module ViewsNet
-
   class Client
     include Capybara::DSL
 
