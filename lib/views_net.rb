@@ -18,7 +18,8 @@ Capybara.register_driver :poltergeist do |app|
     :phantomjs_logger => Module.new {
       def self.puts(*)
       end
-    }
+    },
+    :phantomjs_options => ['--ignore-ssl-errors=yes']
   )
 end
 
