@@ -20,9 +20,8 @@ Capybara.register_driver :poltergeist do |app|
       end
     },
     :phantomjs_options => [
-      '--ignore-ssl-errors=yes', 
       '--ssl-protocol=any',
-      '--load-images=no']
+    ],
   )
 end
 
